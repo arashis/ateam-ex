@@ -1,0 +1,23 @@
+<h1>Mini Blog</h1>
+<%= link_to '戻る', blogs_path %>
+<hr>
+<h2><%= @blog.body %></h2>
+<%= @blog.id %> | 投稿日時: <%= @blog.created_at %> | <%= link_to 'いいね', likeup_blog_path(id: @blog.id) %><%= @blog.like %>
+
+<%= form_for(@reply,:url => {:controller => :replies, :action => :create, :blog_id => @blog.id}) do |f| %>
+<p>
+    <%= f.text_field :comment %>
+    <%= f.submit "コメントする" %>
+</p>
+<% end %>
+<hr>
+<p>
+    <% @replies.each do |reply| %>
+    <p>
+        &nbsp;&nbsp;&nbsp;
+        <%= reply.comment%> | 投稿日時: <%= reply.created_at %>
+
+    </p>
+    <hr>
+    <% end %>
+</p>

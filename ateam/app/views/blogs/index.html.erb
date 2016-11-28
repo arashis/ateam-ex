@@ -1,0 +1,26 @@
+<h1>Mini blog</h1>
+
+<%= form_for @blog do |f| %>
+
+<p>
+    <%= f.text_field :body %>
+    <%= f.submit "投稿する" %>
+</p>
+<hr>
+
+<% end %>
+
+<p>
+    <% @blogs.each do |blog| %>
+    <p>
+            <%= blog.id %>:
+            <%= link_to blog.body, blog_path(blog.id) %>
+            <br />
+            <%= link_to 'いいね: ', likeup_blog_path(id: blog.id) %><%= blog.like %>
+            | コメント数: <%= blog.replies.count %>
+            | 投稿日時: <%= blog.created_at %>
+    </p>
+    <hr>
+
+    <% end %>
+</p>
